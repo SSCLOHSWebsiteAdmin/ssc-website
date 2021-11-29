@@ -24,11 +24,22 @@ This is Lillian Osborne's Student Solidarity Committee's Website. If you didn't 
 ### By Dec 23rd
 * Figure out hosting
 
-### ~Jan 7th Meet with Executives, present the website, discuss Black History Month Home Page Redesign, Discuss domain, 
-### By Jan 10th
+### ~Jan 3rd
+* Meet with Executives
+  * present the website
+  * discuss Black History Month Home Page Redesign
+  * Discuss domain, 
+### By Jan 7th
 * Host website
-### ~ Jan 14th Meet with Mr Zhang to redirect lohs.ca/solidarity to our website and add announcement to LOHS TV
-### ~ Jan 14th Discuss Black History Month Home page redesign with Black Students Association (two times)?
+### ~ Jan 10th
+* Meet with Mr Zhang to redirect lohs.ca/solidarity to our website
+* add announcement about redesign to LOHS TV
+### ~ Jan 14th
+* Discuss Black History Month Home page redesign with Black Students Association
+### ~ Jan 21st
+* Discuss Black History Month Home page redesign with Black Students Association
+### ~ Jan 28st
+* Discuss Black History Month Home page redesign with Black Students Association
 
 ### By Feb 1st 
 * release Black History Month Redesign
