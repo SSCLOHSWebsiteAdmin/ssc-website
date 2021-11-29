@@ -1,4 +1,4 @@
-# ssc-website
+# Student Solidarity Website
 ## Description
 This is Lillian Osborne's Student Solidarity Committee's Website. If you didn't know that already then uhh...
 ## Collaborators (2021-2022)
@@ -32,3 +32,4 @@ This is Lillian Osborne's Student Solidarity Committee's Website. If you didn't 
 
 ### By Feb 1st 
 * release Black History Month Redesign
+* Add announcment on LOHS TV
