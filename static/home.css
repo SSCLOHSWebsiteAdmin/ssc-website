@@ -1,0 +1,10 @@
+#sky
+{
+    width: 100vw;
+    height: 40vh;
+    background-image: linear-gradient(rgba(202,240,243,1) 30%, rgba(0,0,0,0));
+    z-index: -1;
+    position: absolute;
+    top:0;
+
+}
