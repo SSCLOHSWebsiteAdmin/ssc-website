@@ -2,8 +2,9 @@
 {% block head %}
     <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
 {% endblock %}
-
-{% block content %}
+{% block decorations %}
     <div id="sky"></div>
+{% endblock %}
+{% block content %}
     <h1>hey</h1>
 {% endblock %}

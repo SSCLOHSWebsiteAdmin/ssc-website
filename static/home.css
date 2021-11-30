@@ -1,10 +1,15 @@
 #sky
 {
     width: 100vw;
-    height: 40vh;
-    background-image: linear-gradient(rgba(202,240,243,1) 30%, rgba(0,0,0,0));
+    height: 80vh;
+    background-image: linear-gradient(rgba(202,240,243,1) 40%, rgba(0,0,0,0));
     z-index: -1;
     position: absolute;
     top:0;
+}
 
+#school
+{
+    background-image: #272727;
+    height:
 }

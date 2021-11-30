@@ -6,7 +6,11 @@ app = Flask(__name__)
 @app.route('/')
 def index():
 
-    return render_template('home.html',name="Home")
+    return redirect('/home')
+
+@app.route('/home')
+def home():
+    return render_template('home.html', name="Home")
 
 # run the app
 if __name__ == "__main__":

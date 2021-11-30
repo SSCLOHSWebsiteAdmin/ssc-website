@@ -12,6 +12,31 @@
     {% block head %}{% endblock %}
 </head>
 <body>
+    <div id="nav">
+        <a href="/home" class="nav-item">
+            Home
+        </a>
+
+        <a href="/ShowYourSolidarity" class="nav-item">
+            SYS
+        </a>
+
+        <a href="/issues" class="nav-item">
+            Issues
+        </a>
+
+        <a href="/Current Events" class="nav-item">
+            Current Events
+        </a>
+
+        <a href="/blog" class="nav-item">
+            Blog
+        </a>
+
+    </div>
+    <div id="decorations">
+        {% block decorations %}{% endblock %}
+    </div>
     <div id="content">
         {% block content %}{% endblock %}
     </div>

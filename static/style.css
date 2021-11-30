@@ -4,6 +4,42 @@ body
     background-color: #FCCCC0;
 }
 
+#nav
+{
+    background-color: #000000;
+    height: 50px;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left:0;
+    z-index: 2;
+    text-align: center;
+}
+
+#content
+{
+    position: absolute;
+    top: 75px;
+    margin: 2%;
+}
+
+.nav-item
+{
+    color: #ffffff !important;
+    font-family: "Times New Roman", Times, serif;
+    display: inline-block;
+    font-size: 20px;
+    text-decoration: none;
+    margin: 1%;
+    margin-top: 15px;
+}
+
+.nav-item:hover
+{
+    transition-duration: 0.4s;
+    color: #FFD966 !important;
+}
+
 h1
 {
     font-family: 'Cinzel', serif;
@@ -12,4 +48,8 @@ h1
 p
 {
     font-family: 'Open Sans Condensed', sans-serif;
+}
+
+a:link{
+    color: #FFD966;
 }
