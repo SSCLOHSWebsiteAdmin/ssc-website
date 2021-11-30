@@ -1,0 +1,19 @@
+#sky
+{
+    width: 100vw;
+    height: 80vh;
+    background-image: linear-gradient(rgba(202,240,243,1) 40%, rgba(0,0,0,0));
+    z-index: -1;
+    position: absolute;
+    top:0;
+}
+
+#school
+{
+    background-color: #272727;
+    width: 600px;
+    height: 300px;
+
+    position: absolute;
+    top: 30vh;
+}

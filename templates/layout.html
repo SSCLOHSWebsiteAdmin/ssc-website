@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&display=swap" rel="stylesheet">
+
+    <title>{{name}} - Lohs SSC</title>
+    <meta charset="UTF-8">
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <div id="nav">
+        <a href="/home" class="nav-item">
+            Home
+        </a>
+
+        <a href="/ShowYourSolidarity" class="nav-item">
+            SYS
+        </a>
+
+        <a href="/issues" class="nav-item">
+            Issues
+        </a>
+
+        <a href="/CurrentEvents" class="nav-item">
+            Current Events
+        </a>
+
+        <a href="/blog" class="nav-item">
+            Blog
+        </a>
+
+    </div>
+    <div id="decorations">
+        {% block decorations %}{% endblock %}
+    </div>
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+    <div id="footer">
+
+    </div>
+</body>
+</html>
