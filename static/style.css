@@ -40,6 +40,14 @@ body
     color: #FFD966 !important;
 }
 
+#title
+{
+    margin: auto;
+    text-align: center;
+    width: 100vw;
+    font-size: 50px;
+}
+
 h1
 {
     font-family: 'Cinzel', serif;
