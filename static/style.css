@@ -18,9 +18,17 @@ body
 
 #content
 {
-    position: absolute;
-    top: 75px;
     margin: 2%;
+    margin-top: 75px;
+}
+
+#footer
+{
+    position: absolute;
+    bottom:0;
+    width:100%;
+    padding-bottom:2%;
+    text-align: center;
 }
 
 .nav-item
@@ -44,7 +52,7 @@ body
 {
     margin: auto;
     text-align: center;
-    width: 100vw;
+    width: 100%;
     font-size: 50px;
 }
 
@@ -60,4 +68,61 @@ p
 
 a:link{
     color: #FFD966;
+}
+
+.arrow
+{
+    background-color: #272727;
+    width: 15px;
+    height: 15px;
+    border-radius: 20px;
+    margin:auto;
+    vertical-align: middle;
+    top: 50%;
+    z-index: 2;
+}
+
+.right
+{
+    position: absolute;
+    right: 0;
+}
+
+.left
+{
+    position: absolute;
+    left: 0;
+}
+
+.carousel
+{
+    vertical-align: middle;
+    position: relative;
+    width: 20vw;
+    height: 20vw;
+}
+
+.carousel-items
+{
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.carousel-item
+{
+    height:100%;
+    border-radius: 20px;
+    margin: auto;
+    vertical-align: middle;
+}
+
+.shown-carousel-item
+{
+    display: block;
+}
+
+.hidden-carousel-item
+{
+    display: none;
 }
