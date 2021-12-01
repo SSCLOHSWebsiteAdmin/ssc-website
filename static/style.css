@@ -18,9 +18,8 @@ body
 
 #content
 {
-    position: absolute;
-    top: 75px;
     margin: 2%;
+    margin-top: 75px;
 }
 
 .nav-item
@@ -60,4 +59,27 @@ p
 
 a:link{
     color: #FFD966;
+}
+
+.arrow
+{
+    background-color: #272727;
+    width: 15px;
+    height: 15px;
+    border-radius: 20px;
+    margin:auto;
+    display: inline-block;
+    vertical-align: middle;
+}
+.carousel
+{
+    vertical-align: middle;
+}
+
+.carousel-item
+{
+    width:80vw;
+    display: inline-block;
+    margin: auto;
+    vertical-align: middle;
 }

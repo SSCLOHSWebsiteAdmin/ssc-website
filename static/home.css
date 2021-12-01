@@ -8,12 +8,10 @@
     top:0;
 }
 
-#school
+.banner
 {
     background-color: #272727;
-    width: 600px;
-    height: 300px;
-
-    position: absolute;
-    top: 30vh;
+    width: 50vw;
+    height: 20vh;
+    border-radius: 20px;
 }
