@@ -79,6 +79,7 @@ a:link{
     margin:auto;
     vertical-align: middle;
     top: 50%;
+    z-index: 2;
 }
 
 .right
@@ -101,11 +102,27 @@ a:link{
     height: 20vw;
 }
 
+.carousel-items
+{
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
 .carousel-item
 {
-    width:80vw;
-    display: inline-block;
+    height:100%;
+    border-radius: 20px;
     margin: auto;
     vertical-align: middle;
+}
 
+.shown-carousel-item
+{
+    display: block;
+}
+
+.hidden-carousel-item
+{
+    display: none;
 }
