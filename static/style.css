@@ -22,6 +22,15 @@ body
     margin-top: 75px;
 }
 
+#footer
+{
+    position: absolute;
+    bottom:0;
+    width:100%;
+    padding-bottom:2%;
+    text-align: center;
+}
+
 .nav-item
 {
     color: #ffffff !important;
@@ -43,7 +52,7 @@ body
 {
     margin: auto;
     text-align: center;
-    width: 100vw;
+    width: 100%;
     font-size: 50px;
 }
 
@@ -68,12 +77,28 @@ a:link{
     height: 15px;
     border-radius: 20px;
     margin:auto;
-    display: inline-block;
     vertical-align: middle;
+    top: 50%;
 }
+
+.right
+{
+    position: absolute;
+    right: 0;
+}
+
+.left
+{
+    position: absolute;
+    left: 0;
+}
+
 .carousel
 {
     vertical-align: middle;
+    position: relative;
+    width: 20vw;
+    height: 20vw;
 }
 
 .carousel-item
@@ -82,4 +107,5 @@ a:link{
     display: inline-block;
     margin: auto;
     vertical-align: middle;
+
 }
