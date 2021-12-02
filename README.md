@@ -4,6 +4,8 @@ This is Lillian Osborne's Student Solidarity Committee's Website. If you didn't 
 ## Collaborators (2021-2022)
 * Sam Low
 * Aayushman
+## To Do list
+* Write documentation on the carousel system
 ## Task Timeline
 ### By Dec 6th
 * Navigation
