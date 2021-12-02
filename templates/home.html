@@ -6,10 +6,10 @@
     <div id="sky"></div>
 {% endblock %}
 {% block content %}
-    <div class="carousel" style="width:50%;">
+    <div class="carousel" style="width:95%; height: 30vh; margin:auto;">
         <div onclick="moveCarousel(this,-1)" class="left arrow"></div>
         <div class="carousel-items">
-            <img class="shown-carousel-item carousel-item" src="{{ url_for('static', filename='among.jpg') }}">
+            <img class="shown-carousel-item carousel-item" src="{{ url_for('static', filename='bannerthing.png') }}">
             <img class="hidden-carousel-item carousel-item" src="{{ url_for('static', filename='among1.png') }}">
         </div>
         <div onclick="moveCarousel(this,1)" class="right arrow"></div>
