@@ -2,12 +2,13 @@ body
 {
     margin: 0;
     background-color: #FCCCC0;
+    overflow-x: hidden;
 }
 
 #nav
 {
     background-color: #000000;
-    height: 50px;
+    height: 45px;
     width: 100vw;
     position: fixed;
     top: 0;
