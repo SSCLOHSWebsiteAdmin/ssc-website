@@ -8,6 +8,14 @@
     top:0;
 }
 
+#school
+{
+    margin: 0;
+    width: 100%;
+    z-index: -1;
+    position: absolute;
+    top: 45vh;
+}
 .banner
 {
     background-color: #272727;
