@@ -1,7 +1,7 @@
 #sky
 {
     width: 100vw;
-    height: 80vh;
+    height: 40vw;
     background-image: linear-gradient(rgba(202,240,243,1) 40%, rgba(0,0,0,0));
     z-index: -1;
     position: absolute;
@@ -14,7 +14,7 @@
     width: 100%;
     z-index: -1;
     position: absolute;
-    top: 45vh;
+    top: 23vw;
 }
 .banner
 {
@@ -22,4 +22,61 @@
     width: 50vw;
     height: 20vh;
     border-radius: 20px;
+}
+
+.homeTitle
+{
+    margin: auto;
+    width: 100%;
+    font-size: 4vw;
+}
+.homePara
+{
+    margin: 0;
+    font-size: 2vw;
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+#welcome
+{
+    width: 100vw;
+    height: 30vw;
+}
+#welcomeText
+{
+    position: relative;
+    top:  30%;
+    left: 46%;
+    width:48%;
+}
+
+#whatDoWeDo
+{
+    width: 100vw;
+    height: 50vw;
+}
+
+#whatDoWeDoText
+{
+    position: relative;
+    top: 30%;
+    left: 5%;
+    width: 50%;
+}
+
+#checkout
+{
+    width: 100vw;
+    height: 50vw;
+}
+
+#person
+{
+    position: relative;
+    left: 10%;
+    width:70%;
+}
+
+#executives
+{
+    background-image: url(""
 }

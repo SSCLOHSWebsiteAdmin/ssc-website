@@ -19,13 +19,14 @@ body
 
 #content
 {
-    margin: 2%;
+    margin: 0;
+    width:100vw;
     margin-top: 75px;
 }
 
 #footer
 {
-    position: absolute;
+    position: relative;
     bottom:0;
     width:100%;
     padding-bottom:2%;
@@ -64,6 +65,8 @@ h1
 
 p
 {
+    margin: 10px;
+    font-size: 25px;
     font-family: 'Open Sans Condensed', sans-serif;
 }
 
@@ -73,14 +76,19 @@ a:link{
 
 .arrow
 {
-    background-color: #272727;
-    width: 15px;
-    height: 15px;
-    border-radius: 20px;
+    height: 30%;
+    width: auto;
     margin:auto;
     vertical-align: middle;
-    top: 50%;
-    z-index: 2;
+    top: 40%;
+    z-index: 1;
+}
+
+.arrow:hover
+{
+    height: 35%;
+    top: 37.5%;
+    cursor: pointer;
 }
 
 .right
@@ -91,8 +99,20 @@ a:link{
 
 .left
 {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
     position: absolute;
     left: 0;
+}
+
+.left:hover
+{
+    left: -0.5%;
+}
+
+.right:hover
+{
+    right: -0.5%;
 }
 
 .carousel
@@ -126,4 +146,15 @@ a:link{
 .hidden-carousel-item
 {
     display: none;
+}
+
+.section
+{
+    background-color: #C02C2C;
+    color: #ffffff;
+    text-align: center;
+    width: 100%;
+    font-size: 50px;
+    padding-top: 1.5%;
+    padding-bottom: 0.5%;
 }

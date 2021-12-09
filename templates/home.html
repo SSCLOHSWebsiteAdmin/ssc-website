@@ -7,14 +7,47 @@
     <img src="static/bg.svg" id="school">
 {% endblock %}
 {% block content %}
-    <div class="carousel" style="width:95%; height: 10vw; margin:auto; margin-top: 100px;">
-        <div onclick="moveCarousel(this,-1)" class="left arrow"></div>
+    <div class="carousel" style="width:80%; height: 10vw; margin:auto; margin-top: 80px;">
+        <img src="static/button.svg" onclick="moveCarousel(this,-1)" class="left arrow">
         <div class="carousel-items">
-            <img class="shown-carousel-item carousel-item" src="{{ url_for('static', filename='bannerthing.png') }}">
+            <img class="shown-carousel-item carousel-item" src="{{ url_for('static', filename='report_form.svg') }}">
             <img class="hidden-carousel-item carousel-item" src="{{ url_for('static', filename='among1.png') }}">
         </div>
-        <div onclick="moveCarousel(this,1)" class="right arrow"></div>
+        <img src="static/button.svg" onclick="moveCarousel(this,1)" class="right arrow">
     </div>
 
-    <h1>hey</h1>
+    <div id="welcome">
+        <div id="welcomeText">
+            <h1 class="homeTitle">Welcome!</h1>
+            <p class="homePara">
+                Welcome to the Student Solidarity committee's website! This committee was created to address many of the
+                prevalent social issues within present day society, and acknowledge the identities and struggles of the
+                individuals within our school. Therefore, this committee strives to merge student’s social awareness
+                with their academic education.
+            </p>
+        </div>
+    </div>
+
+    <div id="whatDoWeDo">
+        <div id="whatDoWeDoText">
+            <h1 class="homeTitle">What Do We Do?</h1>
+            <p class="homePara">
+                Thanks to the generosity of our school community, we've supported several institutions such as the Today
+                Center. We also research various issues and current events in order to be a source of reliable
+                information for our fellow students!
+            </p>
+        </div>
+    </div>
+
+    <div id="checkout">
+        <img src="static/person.svg" id="person">
+    </div>
+
+    <div class="section">
+        Meet Our Executives
+    </div>
+
+    <div id="executives">
+        hello
+    </div>
 {% endblock %}
