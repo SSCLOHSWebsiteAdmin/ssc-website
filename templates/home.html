@@ -1,9 +1,16 @@
 {% extends "layout.html" %}
 {% block head %}
     <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    <script src="{{ url_for('static', filename='home.js') }}"></script>
 {% endblock %}
+
+{% block onload %}
+    onload="setupClouds(23);"
+{% endblock %}
+
 {% block decorations %}
     <div id="sky"></div>
+    <div id="clouds" class="up"></div>
     <img src="static/bg.svg" id="school">
 {% endblock %}
 {% block content %}

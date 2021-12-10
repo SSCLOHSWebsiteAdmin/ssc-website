@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     {% block head %}{% endblock %}
 </head>
-<body>
+<body {% block onload %}{% endblock %}>
     <div id="nav">
         <a href="/home" class="nav-item">
             Home

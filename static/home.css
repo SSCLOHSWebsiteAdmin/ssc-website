@@ -2,10 +2,38 @@
 {
     width: 100vw;
     height: 40vw;
-    background-image: linear-gradient(rgba(202,240,243,1) 40%, rgba(0,0,0,0));
+    background-image: linear-gradient(rgba(171, 249, 255) 40%, rgba(0,0,0,0));
     z-index: -1;
     position: absolute;
     top:0;
+}
+
+#clouds
+{
+    transition-duration: 5s;
+    transition-timing-function: linear;
+    position: absolute;
+    width: 100vw;
+    height: 25vw;
+}
+
+.cloud
+{
+    z-index: -1;
+    width: 15vw;
+    position: absolute;
+    transition-duration: 5s;
+    transition-timing-function: linear;
+}
+
+.up
+{
+    top:0;
+}
+
+.down
+{
+    top:1vw;
 }
 
 #school
@@ -36,15 +64,17 @@
     font-size: 2vw;
     font-family: 'Open Sans Condensed', sans-serif;
 }
+
 #welcome
 {
     width: 100vw;
     height: 30vw;
 }
+
 #welcomeText
 {
     position: relative;
-    top:  30%;
+    top:  35%;
     left: 46%;
     width:48%;
 }
@@ -58,7 +88,7 @@
 #whatDoWeDoText
 {
     position: relative;
-    top: 30%;
+    top: 33%;
     left: 5%;
     width: 50%;
 }
@@ -78,5 +108,4 @@
 
 #executives
 {
-    background-image: url(""
 }
