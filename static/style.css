@@ -29,7 +29,7 @@ body
     position: relative;
     bottom:0;
     width:100%;
-    padding-bottom:2%;
+    padding: 2%;
     text-align: center;
 }
 
@@ -52,6 +52,7 @@ body
 
 #title
 {
+    font-family: 'Cinzel', serif;
     margin: auto;
     text-align: center;
     width: 100%;
@@ -150,6 +151,7 @@ a:link{
 
 .section
 {
+    font-family: 'Cinzel', serif;
     background-color: #C02C2C;
     color: #ffffff;
     text-align: center;

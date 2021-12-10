@@ -108,4 +108,39 @@
 
 #executives
 {
+    padding: 5%;
+    background-image: url("among.svg");
+    background-repeat: repeat;
+    background-color: #efefef;
+}
+
+.exec-block
+{
+    margin-bottom:10%;
+    position: relative;
+    width: 100%;
+    height: 35vw;
+}
+
+.exec-box
+{
+    width: 60%;
+    height: 80%;
+    position: absolute;
+}
+
+.exec-img
+{
+    position: absolute;
+    height:80%;
+}
+
+.left-exec
+{
+    left: 0%;
+}
+
+.right-exec
+{
+    right: 0%;
 }
