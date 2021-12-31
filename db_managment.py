@@ -1,41 +1,58 @@
 import sqlite3
+import pathlib
 
-con = sqlite3.connect('database.db')
+DATABASE_FILE = "database.db"
+
+FIRST_RUN   = True
+if (pathlib.Path.cwd() / DATABASE_FILE).exists():
+    FIRST_RUN   = False
+
+con = sqlite3.connect(DATABASE_FILE)
 cursor = con.cursor()
 
 def resetDatebase():
     global con, cursor
-    print("Warning! Resetting the database will reset the database (duh). Doing this will completly delete all of the website's content")
-    CHOICE = input("Enter 'Yes I do wish to delete everything 👍' if that is your true intention: ") == 'Yes I do wish to delete everything 👍'
-    if CHOICE == True:
 
-        cursor.execute('''
-            CREATE TABLE currentEvents(
-                title text,
-                date text,
-                text text,
-                images integer
-            )''')
+    cursor.execute('''
+        CREATE TABLE blog(
+            title TEXT,
+            date TEXT,
+            text TEXT,
+            images INTEGER
+        )''')
 
-        cursor.execute('''
-            CREATE TABLE images(
-                group_id integer primary key 
-            )''')
+    cursor.execute('''
+        CREATE TABLE currentEvents(
+            title TEXT,
+            date TEXT,
+            text TEXT,
+            images INTEGER
+        )''')
 
+    cursor.execute('''
+        CREATE TABLE images(
+            group_id integer primary key 
+        )''')
 
-        cursor.execute('''
-            CREATE TABLE image(
-                filename text,
-                group_id integer
-            )''')
+    cursor.execute('''
+        CREATE TABLE image(
+            filename TEXT,
+            group_id INTEGER
+        )''')
 
-        con.commit()
+    con.commit()
 
 def addCurrentEvent(title, data, text, images):
     global con, cursor
     cursor.execute('''
-        INSERT INTO 
-    ''')
+        INSERT INTO currentEvents (
+            title ?,
+            date ?,
+            text ?,
+            images ?            
+        )''', (title, data, text, images))
 
 if __name__ == "__main__":
-    pass
+    if FIRST_RUN == True:
+        print("among")
+        resetDatebase()
