@@ -1,4 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, request
+from db_managment import *
 
 # SITE SETUP
 app = Flask(__name__)
@@ -26,7 +27,9 @@ def currentEvents():
 
 @app.route('/blog')
 def blog():
-    return render_template('blog.html', name="Blog")
+    posts = getBlogPosts()
+    print(posts)
+    return render_template('blog.html', name="Blog", posts=posts)
 
 # run the app
 if __name__ == "__main__":
