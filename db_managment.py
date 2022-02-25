@@ -22,6 +22,30 @@ def resetDatebase():
         )''')
 
     cursor.execute('''
+        CREATE TABLE issue(
+            title TEXT,
+            date INTEGER,
+            desc TEXT,
+            urlCode, TEXT
+        )''')
+
+    cursor.execute('''
+        CREATE TABLE issueSection(
+            type TEXT,
+            link TEXT,
+            sectionId INTEGER,
+            urlCode INTEGER
+        )''')
+
+    cursor.execute('''
+        CREATE TABLE issueText(
+            text TEXT,
+            textId INTEGER,
+            sectionId INTEGER,
+            urlCode INTEGER
+        )''')
+
+    cursor.execute('''
         CREATE TABLE currentEvents(
             title TEXT,
             date INTEGER,
@@ -57,6 +81,31 @@ def addBlogPostByText():
         images.append(input("image: "))
 
     addBlogPost(title, date, text, images)
+
+def addIssueByText():
+    title   = input("Title: ")
+    date    = int(input("Date: "))
+    desc    = input("Description: ")
+    url     = input("Url code: ")
+
+    sections    = []
+    texts       = []
+
+    while input("Add more? y/n: ") == "y":
+        type = input("Type (p=photo, y=youtube, e=embed): ")
+        link = input("link: ")
+
+        sections.append([type, link])
+
+        textSection = []
+        print("enter 'end' to end")
+        newText = input("Text: ")
+        while newText != 'end':
+            textSection.append(newText)
+            newText = input("Text: ")
+        texts.append(textSection)
+
+    addIssue(title, date, desc, url, sections, texts)
 
 def addBlogPost(title, date, text, images):
     global con, cursor
@@ -101,6 +150,54 @@ def addBlogPost(title, date, text, images):
 
     con.commit()
 
+def addIssue(title, date, desc, url, sections, texts):
+    global con, cursor
+
+    cursor.execute('''
+        INSERT INTO issue(
+            title,
+            date,
+            desc,
+            urlCode
+        )
+        VALUES (
+            ?, ?, ?, ?
+        )
+        ;''', (title, date, desc, url))
+
+    for section in enumerate(sections):
+        cursor.execute('''
+            INSERT INTO 
+                issueSection (
+                    type,
+                    link,
+                    sectionId,
+                    urlCode
+                )
+            VALUES(
+                ?,?,?,?
+                )
+            ;''', (section[1][0], section[1][1], section[0], url))
+
+    sectionId = 0
+    for textSection in texts:
+        for text in enumerate(textSection):
+            cursor.execute('''
+                INSERT INTO 
+                    issueText (
+                        text,
+                        textId,
+                        sectionId,
+                        urlCode
+                    )
+                VALUES(
+                    ?,?,?,?
+                    )
+                ;''', (text[1], text[0], sectionId, url))
+        sectionId += 1
+
+    con.commit()
+
 def getBlogPosts():
     global con, cursor
 
@@ -128,9 +225,68 @@ def getBlogPosts():
 
     return posts
 
+def getIssueBasic():
+    global con, cursor
+
+    basic = cursor.execute('''
+            SELECT
+                title,
+                date,
+                desc,
+                urlCode
+            FROM
+                issue
+            ORDER BY
+                date DESC
+        ;''').fetchall()
+
+    return basic
+
+def getIssue(urlCode):
+    global con, cursor
+
+    issue = cursor.execute('''
+            SELECT
+                *
+            FROM
+                issue
+            WHERE
+                urlCode = ?
+        ;''',(urlCode,)).fetchone()
+
+    print(issue)
+    issueId = issue[4]
+    print(issueId)
+    sections = cursor.execute('''
+            SELECT
+                *
+            FROM
+                issueSection
+            WHERE
+                urlCode = ?
+            ORDER BY
+                sectionId ASC
+        ;''',(urlCode,)).fetchall()
+
+    texts = []
+
+    for sectionId in range(len(sections)):
+        newTexts = cursor.execute('''
+            SELECT
+                text
+            FROM
+                issueText
+            WHERE
+                urlCode = ? AND sectionId = ?
+            ORDER BY
+                textId ASC
+        ;''',(urlCode, sectionId)).fetchall()
+
+        texts.append(newTexts)
+    return issue, sections, texts
+
 if FIRST_RUN == True:
     resetDatebase()
 
 if __name__ == "__main__":
-
-    addBlogPostByText()
+    addIssueByText()

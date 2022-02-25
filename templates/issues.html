@@ -1,8 +1,19 @@
 {% extends "layout.html" %}
 {% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='issues.css') }}">
 {% endblock %}
 {% block decorations %}
 {% endblock %}
 {% block content %}
     <h1 id="title">{{name}}</h1>
+
+    {% for issue in issues %}
+        <div class="articleBox">
+            <a href="/issues/{{issue[3]}}" class="articleInfo">
+                <h1>{{issue[0]}}</h1>
+                <p>{{issue[1]}}</p>
+                <p>{{issue[2]}}</p>
+            </a>
+        </div>
+    {% endfor %}
 {% endblock %}

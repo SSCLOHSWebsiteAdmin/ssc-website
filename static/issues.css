@@ -1,0 +1,61 @@
+.articleBox
+{
+    position: relative;
+    display: block;
+    width: 100vw;
+    margin-top: 2%;
+}
+
+.articleInfo
+{
+    position: relative;
+    width: 70%;
+    left: 5%;
+}
+
+.image
+{
+    width: 80%;
+    position:absolute;
+    top: 10%;
+    left: 10%;
+    transition-duration: 1s;
+}
+
+.hide
+{
+    opacity: 0;
+}
+
+.show
+{
+    opacity: 1;
+}
+
+.window
+{
+    width: 100vw;
+    height: 100vh;
+}
+
+#imageSide
+{
+    position: absolute;
+    left:0;
+    width:50%;
+    height:100%;
+}
+
+#textSide
+{
+    position: absolute;
+    width:50%;
+    left:50%;
+    overflow:scroll;
+    height: 100%;
+}
+
+.slidingText
+{
+    margin-bottom: 70vh;
+}
