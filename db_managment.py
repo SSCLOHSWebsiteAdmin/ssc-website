@@ -198,6 +198,40 @@ def addIssue(title, date, desc, url, sections, texts):
 
     con.commit()
 
+def deleteIssue():
+    global con, cursor
+
+    issues = cursor.execute('''
+        SELECT
+            urlCode
+        FROM
+            issue
+        ORDER BY
+            date DESC
+    ;''').fetchall()
+
+    print("you are deleting an issue.")
+    for issue in enumerate(issues):
+        #print(issue)
+        print(str(issue[0]+1) + '. ' + issue[1][0])
+
+    choice = input("which issue to delete ('n' to cancel): ")
+
+    if choice != 'n':
+        deleted = issues[int(choice)-1][0]
+        cursor.execute('''
+            DELETE FROM
+                issue
+            WHERE
+                urlCode = ?
+            ;''',(deleted,))
+    else:
+        print('canceled!')
+
+    con.commit()
+
+    print(deleted + " has been deleted")
+
 def getBlogPosts():
     global con, cursor
 
@@ -289,4 +323,10 @@ if FIRST_RUN == True:
     resetDatebase()
 
 if __name__ == "__main__":
-    addIssueByText()
+    choice = input('0: add blog post\n1: add issue\n2: delete issue\n\nchoice: ')
+    if choice == '0':
+        addBlogPostByText()
+    elif choice == '1':
+        addIssueByText()
+    elif choice == '2':
+        deleteIssue()

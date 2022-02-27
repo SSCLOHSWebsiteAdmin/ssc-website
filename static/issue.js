@@ -17,7 +17,7 @@ function checkTransition()
     var section = 0;
     var textSide = document.getElementById("textSide");
 
-    while (points[section] < textSide.scrollTop + 300)
+    while (points[section] < textSide.scrollTop + 500)
     {
         section = section + 1;
     }

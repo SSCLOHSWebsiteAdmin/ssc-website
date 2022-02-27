@@ -25,7 +25,7 @@ def issues():
 @app.route('/issues/<id>')
 def issue(id):
     issues, sections, texts = getIssue(id)
-    return render_template('issue.html', name=issues[0], issue=issue, sections=sections, texts=texts)
+    return render_template('issue.html', name=issues[0], issue=issues, sections=sections, texts=texts)
 
 @app.route('/CurrentEvents')
 def currentEvents():
