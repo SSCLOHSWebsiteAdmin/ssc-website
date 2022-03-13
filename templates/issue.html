@@ -21,7 +21,7 @@
         <div style="height:30vh;"></div>
         {% for textGroups in texts %}
             {% for text in textGroups %}
-                <p class="slidingText">{{text[0]}}</p>
+                <p class="slidingText">{{text[0]|safe}}</p>
             {% endfor %}
             <div class="marker"></div>
         {% endfor %}
