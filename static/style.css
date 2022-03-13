@@ -72,23 +72,23 @@ p
 }
 
 a:link{
-    color: #FFD966;
+    color: #000000;
 }
 
 .arrow
 {
-    height: 30%;
+    height: 10%;
     width: auto;
     margin:auto;
     vertical-align: middle;
-    top: 40%;
+    top: 45%;
     z-index: 1;
 }
 
 .arrow:hover
 {
-    height: 35%;
-    top: 37.5%;
+    height: 12%;
+    top: 44%;
     cursor: pointer;
 }
 
@@ -120,8 +120,7 @@ a:link{
 {
     vertical-align: middle;
     position: relative;
-    width: 20vw;
-    height: 20vw;
+    margin-bottom: 1%;
 }
 
 .carousel-items
@@ -133,8 +132,8 @@ a:link{
 
 .carousel-item
 {
+    max-width: 80%;
     height:100%;
-    border-radius: 20px;
     margin: auto;
     vertical-align: middle;
 }

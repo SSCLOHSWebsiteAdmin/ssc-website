@@ -1,4 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, request
+from db_managment import *
 
 # SITE SETUP
 app = Flask(__name__)
@@ -18,7 +19,13 @@ def SYS():
 
 @app.route('/issues')
 def issues():
-    return render_template('issues.html', name="Issues")
+    issues = getIssueBasic()
+    return render_template('issues.html', name="Issues", issues=issues)
+
+@app.route('/issues/<id>')
+def issue(id):
+    issues, sections, texts = getIssue(id)
+    return render_template('issue.html', name=issues[0], issue=issues, sections=sections, texts=texts)
 
 @app.route('/CurrentEvents')
 def currentEvents():
@@ -26,7 +33,9 @@ def currentEvents():
 
 @app.route('/blog')
 def blog():
-    return render_template('blog.html', name="Blog")
+    posts = getBlogPosts()
+    print(posts)
+    return render_template('blog.html', name="Blog", posts=posts)
 
 # run the app
 if __name__ == "__main__":

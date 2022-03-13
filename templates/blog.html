@@ -4,5 +4,27 @@
 {% block decorations %}
 {% endblock %}
 {% block content %}
-    <h1 id="title">{{name}}</h1>
+
+<h1 id="title">{{name}}</h1>
+
+{% for post in posts %}
+    <div style="width: 50%; margin: 5%;">
+        <h1>{{post[0]}}</h1>
+        <p>Date: {{post[1]}}</p>
+        <div class="carousel" style="width:50%; height: 20vw;">
+            <img src="static/button.svg" onclick="moveCarousel(this,-1)" class="left arrow">
+            <div class="carousel-items">
+                <img class="shown-carousel-item carousel-item" src="{{ url_for('static', filename=post[3][0][0]) }}">
+                {% for image in post[3][1:] %}
+                    <img class="hidden-carousel-item carousel-item" src="{{ url_for('static', filename=image[0]) }}">
+                {% endfor %}
+            </div>
+            <img src="static/button.svg" onclick="moveCarousel(this,1)" class="right arrow">
+        </div>
+
+        <p>{{post[2]}}</p>
+    </div>
+    <hr style="margin:5%; border: 1px solid black;">
+{% endfor %}
+
 {% endblock %}

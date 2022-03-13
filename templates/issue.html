@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='issues.css') }}">
+<script src="{{ url_for('static', filename='issue.js') }}"></script>
+{% endblock %}
+{% block decorations %}
+{% endblock %}
+{% block content %}
+    <h1 id="title">{{name}}</h1>
+    <p style="margin: 5%;">{{issue[2]}}</p>
+    <div class="window">
+    <div id="imageSide">
+        <img class="image show" src="{{ url_for('static', filename=sections[0][1]) }}">
+
+        {% for section in sections[1:] %}
+            <img class="image hide" src="{{ url_for('static', filename=section[1]) }}">
+        {% endfor %}
+    </div>
+
+    <div id="textSide">
+        <div style="height:30vh;"></div>
+        {% for textGroups in texts %}
+            {% for text in textGroups %}
+                <p class="slidingText">{{text[0]|safe}}</p>
+            {% endfor %}
+            <div class="marker"></div>
+        {% endfor %}
+    </div>
+    </div>
+{% endblock %}
