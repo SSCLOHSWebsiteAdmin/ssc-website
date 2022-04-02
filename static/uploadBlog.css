@@ -1,0 +1,24 @@
+#title
+{
+    font-family: 'Cinzel', serif;
+    margin: auto;
+    text-align: center;
+    width: 80%;
+    font-size: 50px;
+}
+
+#text
+{
+    margin: auto;
+    width: 76%;
+    max-width: 76%;
+    min-width: 76%;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 20px;
+    padding: 2%;
+}
+
+.file
+{
+    margin: 2%;
+}

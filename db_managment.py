@@ -16,7 +16,7 @@ def resetDatebase():
     cursor.execute('''
         CREATE TABLE blog(
             title TEXT,
-            date INTEGER,
+            date TEXT,
             text TEXT,
             images INTEGER
         )''')
@@ -24,7 +24,7 @@ def resetDatebase():
     cursor.execute('''
         CREATE TABLE issue(
             title TEXT,
-            date INTEGER,
+            date TEXT,
             desc TEXT,
             urlCode, TEXT
         )''')
@@ -48,7 +48,7 @@ def resetDatebase():
     cursor.execute('''
         CREATE TABLE currentEvents(
             title TEXT,
-            date INTEGER,
+            date TEXT,
             text TEXT,
             images INTEGER
         )''')
@@ -73,7 +73,7 @@ def addCurrentEvent(title, date, text, images):
 
 def addBlogPostByText():
     title = input("Title: ")
-    date = int(input("Date: "))
+    date = input("Date: ")
     text = input("Text: ")
 
     images = []
@@ -84,7 +84,7 @@ def addBlogPostByText():
 
 def addIssueByText():
     title   = input("Title: ")
-    date    = int(input("Date: "))
+    date    = input("Date: ")
     desc    = input("Description: ")
     url     = input("Url code: ")
 
@@ -232,6 +232,39 @@ def deleteIssue():
 
     print(deleted + " has been deleted")
 
+def deletePost():
+    global con, cursor
+
+    blog = cursor.execute('''
+        SELECT
+            title
+        FROM
+            blog
+        ORDER BY
+            date DESC
+    ;''').fetchall()
+
+    print("you are deleting an issue.")
+    for issue in enumerate(blog):
+        #print(issue)
+        print(str(issue[0]+1) + '. ' + issue[1][0])
+
+    choice = input("which issue to delete ('n' to cancel): ")
+
+    if choice != 'n':
+        deleted = blog[int(choice)-1][0]
+        cursor.execute('''
+            DELETE FROM
+                blog
+            WHERE
+                title = ?
+            ;''',(deleted,))
+    else:
+        print('canceled!')
+
+    con.commit()
+
+    print(deleted + " has been deleted")
 def getBlogPosts():
     global con, cursor
 
@@ -323,10 +356,14 @@ if FIRST_RUN == True:
     resetDatebase()
 
 if __name__ == "__main__":
-    choice = input('0: add blog post\n1: add issue\n2: delete issue\n\nchoice: ')
+    choice = input('0: add blog post\n1: add issue\n2: delete issue\n3: delete post\n4: rest database\n\nchoice: ')
     if choice == '0':
         addBlogPostByText()
     elif choice == '1':
         addIssueByText()
     elif choice == '2':
         deleteIssue()
+    elif choice == '3':
+        deletePost()
+    elif choice == '4':
+        resetDatebase()

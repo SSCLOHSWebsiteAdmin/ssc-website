@@ -10,10 +10,10 @@
     <p style="margin: 5%;">{{issue[2]}}</p>
     <div class="window">
     <div id="imageSide">
-        <img class="image show" src="{{ url_for('static', filename=sections[0][1]) }}">
+        <img class="image show" src="{{ url_for('static', filename='uploads/'+sections[0][1]) }}">
 
         {% for section in sections[1:] %}
-            <img class="image hide" src="{{ url_for('static', filename=section[1]) }}">
+            <img class="image hide" src="{{ url_for('static', filename='uploads/'+section[1]) }}">
         {% endfor %}
     </div>
 
