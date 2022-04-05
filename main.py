@@ -61,12 +61,21 @@ def currentEvents():
 
 @app.route('/blog')
 def blog():
-    posts = getBlogPosts()
+    posts = getPublicBlogPosts()
     print(posts)
     return render_template('blog.html', name="Blog", posts=posts)
 
-# Admin Stuff
-@app.route('/uploadBlog', methods=['GET', 'POST'])
+# Admin Stuff,  subdomain="admin"
+@app.route('/admin/blog', methods=['GET', 'POST'])
+def adminBlog():
+    if request.method == 'POST':
+        print("yo")
+        id = request.form['postNumber']
+        toggleBlogPostPublicity(id)
+    posts = getBlogPosts()
+    return render_template('adminBlog.html', name="Blog", posts=posts)
+
+@app.route('/admin/blog/upload', methods=['GET', 'POST'])
 def uploadBlog():
     x = datetime.datetime.now()
     date = str(x.strftime("%Y") + x.strftime("%m") + x.strftime("%d"))
@@ -80,6 +89,23 @@ def uploadBlog():
         addBlogPost(title, date, text, [imagename])
 
     return render_template('uploadBlog.html', name='Upload to Blog')
+
+@app.route('/admin/blog/edit/<id>', methods=['GET', 'POST'])
+def editBlog(id):
+    post = getBlogPost(id)
+
+    x = datetime.datetime.now()
+    date = str(x.strftime("%Y") + x.strftime("%m") + x.strftime("%d"))
+
+    if request.method == 'POST':
+        title = request.form['title']
+        text  = request.form['text']
+        imagename = upload_file()
+        print(imagename)
+        print("posting!")
+        updateBlogPost(title, date, text, [imagename], id)
+
+    return render_template('editBlog.html', name='Upload to Blog', post=post)
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
