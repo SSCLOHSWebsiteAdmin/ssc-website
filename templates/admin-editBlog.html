@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "admin-layout.html" %}
 {% block head %}
     <link rel="stylesheet" href="{{ url_for('static', filename='uploadBlog.css') }}">
     <script src="{{ url_for('static', filename='uploadBlog.js') }}"></script>
@@ -10,11 +10,18 @@
     <form method=post enctype=multipart/form-data>
         <center>
         <input id="title" type="text" name="title" value="{{post[0]}}">
-        <br>
-        Add New Image
-        <img src="{{ url_for('static', filename='uploads/'+post[3][0]) }}">
+
+        <div>
+            <p> <span class="button" onclick="up(this)">^</span> {{post[3][0]}} <span class="button" onclick="deleteImage(this)">delete</span></p>
+        </div>
+
+
         <input class="file" type=file name=file>
-        <div class="button" onclick="newImage()"></div>
+
+        <div class="button" onclick="newImage()" style="width:100px">
+            New Image
+        </div>
+
         <br>
         <textarea id="text" name="text">{{post[2]}}</textarea>
         <br>

@@ -1,0 +1,46 @@
+{% extends "admin-layout.html" %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='issues.css') }}">
+<script src="{{ url_for('static', filename='adminBlog.js') }}"></script>
+{% endblock %}
+{% block decorations %}
+{% endblock %}
+{% block content %}
+
+    <form id="form" method = "POST">
+        <input type="hidden" id="hidden" name="postNumber" value="">
+    </form>
+
+    <h1 id="title">{{name}}</h1>
+
+    <div style="height:50px;">
+    <a href="/admin/blog/upload" style="position:absolute; right:30%;">
+        <div class="button">
+            Upload
+        </div>
+    </a>
+    </div>
+
+{% for post in posts %}
+        <div class="articleBox">
+
+            <div class="articleThumb">
+                <img src="{{ url_for('static', filename='uploads/'+post[3][0]) }}" class="articleImage">
+            </div>
+
+            <div class="articleInfo">
+            <a href="/admin/blog/edit/{{post[4]}}">
+
+                <h1>{{post[0]}}</h1>
+                <p>{{post[1][6:8]}}/{{post[1][4:6]}}/{{post[1][0:4]}}</p>
+            </a>
+            </div>
+
+            {% if post[5] == false %}
+                <input type="button" value="share" onclick="submit({{post[4]}})" class="articleOption">
+            {% else %}
+                <input type="button" value="unshare" onclick="submit({{post[4]}})" class="articleOption">
+            {% endif %}
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -7,7 +7,7 @@ body
 
 #nav
 {
-    background-color: #000000;
+    background-color: #C02C2C;
     height: 45px;
     width: 100vw;
     position: fixed;
@@ -162,10 +162,15 @@ a:link{
 
 .button
 {
-    padding: 2%;
+    padding: 10px;
     background-color: #4360AC;
-    border-radius: 10px;
+    border-radius: 25px;
     color: #FFFFFF;
+    text-decoration: none;
+    font-size: 15px;
+    font-family: "Times New Roman", Times, serif;
+    width: 50px;
+    text-align: center;
 }
 
 .button:hover

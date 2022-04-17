@@ -381,8 +381,9 @@ def getBlogPosts():
                 group_id = ?
         ;''', (posts[i][3],)).fetchall()
 
-        posts[i][3] = images
+        posts[i][3] = images[0]
 
+    print(posts)
     return posts
 
 def getPublicBlogPosts():

@@ -66,6 +66,11 @@ def blog():
     return render_template('blog.html', name="Blog", posts=posts)
 
 # Admin Stuff,  subdomain="admin"
+@app.route('/admin', methods=['GET', 'POST'])
+def admin():
+
+    return render_template('admin.html', name="Admin Hub")
+
 @app.route('/admin/blog', methods=['GET', 'POST'])
 def adminBlog():
     if request.method == 'POST':
@@ -73,7 +78,7 @@ def adminBlog():
         id = request.form['postNumber']
         toggleBlogPostPublicity(id)
     posts = getBlogPosts()
-    return render_template('adminBlog.html', name="Blog", posts=posts)
+    return render_template('admin-blog.html', name="Blog", posts=posts)
 
 @app.route('/admin/blog/upload', methods=['GET', 'POST'])
 def uploadBlog():
@@ -88,7 +93,7 @@ def uploadBlog():
         print("posting!")
         addBlogPost(title, date, text, [imagename])
 
-    return render_template('uploadBlog.html', name='Upload to Blog')
+    return render_template('admin-uploadBlog.html', name='Upload to Blog')
 
 @app.route('/admin/blog/edit/<id>', methods=['GET', 'POST'])
 def editBlog(id):
@@ -105,7 +110,7 @@ def editBlog(id):
         print("posting!")
         updateBlogPost(title, date, text, [imagename], id)
 
-    return render_template('editBlog.html', name='Upload to Blog', post=post)
+    return render_template('admin-editBlog.html', name='Upload to Blog', post=post)
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
