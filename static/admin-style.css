@@ -100,8 +100,6 @@ a:link{
 
 .left
 {
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
     position: absolute;
     left: 0;
 }
@@ -176,4 +174,5 @@ a:link{
 .button:hover
 {
     cursor: pointer;
+    background-color: #5070AC;
 }

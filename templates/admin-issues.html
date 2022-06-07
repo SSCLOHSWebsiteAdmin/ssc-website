@@ -1,0 +1,28 @@
+{% extends "admin-layout.html" %}
+{% block head %}
+    <script src="{{ url_for('static', filename='adminIssues.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='issues.css') }}">
+{% endblock %}
+{% block decorations %}
+{% endblock %}
+{% block content %}
+    <h1 id="title">{{name}}</h1>
+
+    <form id="newIssue" method=post enctype=multipart/form-data>
+        <input type="hidden" id="url" name="url" value="sus">
+    </form>
+
+    <div class="button" onclick="newIssue()">
+        New Issue
+    </div>
+
+    {% for issue in issues %}
+        <div class="articleBox">
+            <a href="/admin/issues/{{issue[3]}}" class="articleInfo">
+                <h1>{{issue[0]}}</h1>
+                <p>{{issue[1]}}</p>
+                <p>{{issue[2]}}</p>
+            </a>
+        </div>
+    {% endfor %}
+{% endblock %}

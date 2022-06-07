@@ -1,0 +1,49 @@
+{% extends "admin-layout.html" %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='uploadBlog.css') }}">
+    <script src="{{ url_for('static', filename='adminIssue.js') }}"></script>
+{% endblock %}
+{% block decorations %}
+{% endblock %}
+{% block content %}
+
+    <form method=post enctype=multipart/form-data>
+
+        <center style="margin:5px;">
+            <input id="title" type="text" name="title" value="{{issue[0]}}">
+            <br>
+            <textarea id="desc" name="desc">{{issue[2]}}</textarea>
+        </center>
+
+        <div class="section">
+            Slides
+        </div>
+
+        {% for section in sections %}
+            <div>
+                <center>
+                    <img src="{{section[1]}}">
+                    <br>
+                    <input type=file name="file0">
+                    <br>
+
+                    {% for text in texts[loop.index0] %}
+                        <textarea name="text">{{text}}</textarea>
+                        <br>
+                    {% endfor %}
+                    <div class="button" onclick="newText(this)">New Text</div>
+                </center>
+                <hr>
+            </div>
+
+            <center>
+                <div class="button" onclick="newSlide(this)">New Slide</div>
+            </center>
+
+        {% endfor %}
+        <div style="width:100vw;">
+            <input type=submit value="Upload" style="position:relative; left:80%;">
+        </div>
+    </form>
+
+{% endblock %}

@@ -15,22 +15,19 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def upload_file():
     if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            print('No file part')
-            flash('No file part')
-        file = request.files['file']
+        files = request.files.getlist('file')
         # If the user does not select a file, the browser submits an
         # empty file without a filename.
-        if file.filename == '':
-            print('No selected file')
-            flash('No selected file')
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            print(filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        for file in files:
+            if file.filename == '' or not allowed_file(file.filename):
+                files.pop(files.index(file))
+            else:
+                filename = secure_filename(file.filename)
+                print(filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-        return file.filename
+        names = [file.filename for file in files]
+        return names
 
 @app.route('/')
 def index():
@@ -71,6 +68,25 @@ def admin():
 
     return render_template('admin.html', name="Admin Hub")
 
+@app.route('/admin/issues', methods=['GET', 'POST'])
+def adminIssues():
+    issues = getIssueBasic()
+
+    if request.method == 'POST':
+        url = request.form['url']
+        x = datetime.datetime.now()
+        date = str(x.strftime("%Y") + x.strftime("%m") + x.strftime("%d"))
+
+        addIssue(" ", date, " ", url, [['p',""]], [[""]])
+        return redirect("/admin/issue/url")
+
+    return render_template('admin-issues.html', name="Issues", issues=issues)
+
+@app.route('/admin/issues/<id>', methods=['GET', 'POST'])
+def adminIssue(id):
+    issues, sections, texts = getIssue(id)
+    return render_template('admin-editissue.html', name=issues[0], issue=issues, sections=sections, texts=texts)
+
 @app.route('/admin/blog', methods=['GET', 'POST'])
 def adminBlog():
     if request.method == 'POST':
@@ -91,7 +107,7 @@ def uploadBlog():
         imagename = upload_file()
         print(imagename)
         print("posting!")
-        addBlogPost(title, date, text, [imagename])
+        addBlogPost(title, date, text, imagename)
 
     return render_template('admin-uploadBlog.html', name='Upload to Blog')
 
@@ -108,7 +124,7 @@ def editBlog(id):
         imagename = upload_file()
         print(imagename)
         print("posting!")
-        updateBlogPost(title, date, text, [imagename], id)
+        updateBlogPost(title, date, text, imagename, id)
 
     return render_template('admin-editBlog.html', name='Upload to Blog', post=post)
 

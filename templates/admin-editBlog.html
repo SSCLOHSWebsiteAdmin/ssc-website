@@ -11,15 +11,14 @@
         <center>
         <input id="title" type="text" name="title" value="{{post[0]}}">
 
-        <div>
-            <p> <span class="button" onclick="up(this)">^</span> {{post[3][0]}} <span class="button" onclick="deleteImage(this)">delete</span></p>
+        <div id="imageList">
+            {% for image in post[3] %}
+                <p> <span class="button" onclick="up(this)">^</span> {{image}} <span class="button" onclick="deleteImage(this)">delete</span></p>
+            {% endfor %}
         </div>
 
-
-        <input class="file" type=file name=file>
-
-        <div class="button" onclick="newImage()" style="width:100px">
-            New Image
+        <div id="files">
+            <input class="file" type=file name=file>
         </div>
 
         <br>

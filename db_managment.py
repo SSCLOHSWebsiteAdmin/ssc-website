@@ -434,7 +434,7 @@ def getBlogPost(id):
             images
         WHERE 
             group_id = ?
-    ;''',(post[3],)).fetchall()[0]
+    ;''',(post[3],)).fetchall()
     print(images)
     fullPost = list(post)
     print(fullPost)
