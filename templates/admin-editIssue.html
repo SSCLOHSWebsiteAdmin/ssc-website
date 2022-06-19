@@ -24,7 +24,7 @@
                 <center>
                     <img src="{{section[1]}}">
                     <br>
-                    <input type=file name="file0">
+                    <input type=file name="file">
                     <br>
 
                     {% for text in texts[loop.index0] %}
@@ -32,6 +32,7 @@
                         <br>
                     {% endfor %}
                     <div class="button" onclick="newText(this)">New Text</div>
+                    <input type="hidden" name="text" value="Among us">
                 </center>
                 <hr>
             </div>

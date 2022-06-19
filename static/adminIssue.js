@@ -1,7 +1,7 @@
 function newSlide(that)
 {
     var div = document.createElement("div");
-    div.innerHTML = '<center><input type=file name="file0"><br><div class="button" onclick="newText(this)">New Text</div></center><hr>'
+    div.innerHTML = '<center><input type=file name="file"><br><div class="button" onclick="newText(this)">New Text</div><input type="hidden" name="text" value="Among us"></center><hr>'
     that.parentElement.insertBefore(div, that);
 
 }

@@ -20,7 +20,8 @@ def upload_file():
         # empty file without a filename.
         for file in files:
             if file.filename == '' or not allowed_file(file.filename):
-                files.pop(files.index(file))
+                pass
+                # files.pop(files.index(file))
             else:
                 filename = secure_filename(file.filename)
                 print(filename)
@@ -84,8 +85,30 @@ def adminIssues():
 
 @app.route('/admin/issues/<id>', methods=['GET', 'POST'])
 def adminIssue(id):
-    issues, sections, texts = getIssue(id)
-    return render_template('admin-editissue.html', name=issues[0], issue=issues, sections=sections, texts=texts)
+    issue, sections, texts = getIssue(id)
+
+    if request.method == 'POST':
+        title = request.form['title']
+        desc = request.form['desc']
+        files = request.files.getlist('file')
+        text = request.form.getlist('text')
+        texts = []
+        for item in text:
+            group = []
+            if item != "Among us":
+                group.append(item)
+            else:
+                texts.append(group)
+                group = []
+        upload_file()
+        print(files)
+
+        #x = datetime.datetime.now()
+        #date = str(x.strftime("%Y") + x.strftime("%m") + x.strftime("%d"))
+
+        #addIssue(" ", date, " ", id, [['p',""]], texts)
+
+    return render_template('admin-editissue.html', name=issue[0], issue=issue, sections=sections, texts=texts)
 
 @app.route('/admin/blog', methods=['GET', 'POST'])
 def adminBlog():
@@ -108,6 +131,7 @@ def uploadBlog():
         print(imagename)
         print("posting!")
         addBlogPost(title, date, text, imagename)
+
 
     return render_template('admin-uploadBlog.html', name='Upload to Blog')
 
