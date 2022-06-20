@@ -9,9 +9,13 @@
 
     {% for issue in issues %}
         <div class="articleBox">
+            <div class="articleThumb">
+                <img src="{{ url_for('static', filename='uploads/'+thumbs[loop.index0]) }}" class="articleImage">
+            </div>
+
             <a href="/issues/{{issue[3]}}" class="articleInfo">
                 <h1>{{issue[0]}}</h1>
-                <p>{{issue[1]}}</p>
+                <p>{{issue[1][6:8]}}/{{issue[1][4:6]}}/{{issue[1][0:4]}}</p>
                 <p>{{issue[2]}}</p>
             </a>
         </div>

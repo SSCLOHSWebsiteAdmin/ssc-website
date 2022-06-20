@@ -1,4 +1,4 @@
-from flask import Flask, flash, render_template, redirect, url_for, request, send_from_directory
+from flask import Flask, flash, session, render_template, redirect, url_for, request, send_from_directory
 from db_managment import *
 import os
 from os.path import join, dirname, realpath
@@ -10,6 +10,8 @@ ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 # SITE SETUP
 app = Flask(__name__)
+
+app.secret_key = b'AmOngStrs_69/'
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -45,8 +47,8 @@ def SYS():
 
 @app.route('/issues')
 def issues():
-    issues = getIssueBasic()
-    return render_template('issues.html', name="Issues", issues=issues)
+    issues, thumbs = getPublicIssueBasic()
+    return render_template('issues.html', name="Issues", issues=issues, thumbs=thumbs)
 
 @app.route('/issues/<id>')
 def issue(id):
@@ -64,63 +66,130 @@ def blog():
     return render_template('blog.html', name="Blog", posts=posts)
 
 # Admin Stuff,  subdomain="admin"
+
+def loggedIn():
+    print("checking session!")
+    if 'login' not in session:
+        print("not logged in")
+        return False
+    else:
+        return True
+
+@app.route('/admin/login', methods=['POST'])
+def login():
+    print("login")
+    message = ""
+    if request.method == 'POST':
+        password = request.form['password']
+
+        if password == "SAM_LOW_IS_COOL":
+            session['login'] = 'logged in!'
+            return redirect('/admin')
+        else:
+            message = "Wrong Password!"
+
+    return render_template('login.html', message=message, name='login')
+
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
-
+    if not loggedIn():
+        return redirect('/admin/login')
     return render_template('admin.html', name="Admin Hub")
 
 @app.route('/admin/issues', methods=['GET', 'POST'])
 def adminIssues():
-    issues = getIssueBasic()
+    if not loggedIn():
+        return redirect('/admin/login')
+    issues, thumbs = getIssueBasic()
+    print("thumbs:")
+    print(thumbs)
+    print(issues)
+    return render_template('admin-issues.html', name="Issues", issues=issues, thumbs=thumbs)
 
-    if request.method == 'POST':
-        url = request.form['url']
-        x = datetime.datetime.now()
-        date = str(x.strftime("%Y") + x.strftime("%m") + x.strftime("%d"))
+@app.route('/newIssue', methods=['POST'])
+def newIssue():
+    if not loggedIn():
+        return redirect('/admin/login')
+    url = request.form['newUrl']
+    x = datetime.datetime.now()
+    date = str(x.strftime("%Y") + x.strftime("%m") + x.strftime("%d"))
 
-        addIssue(" ", date, " ", url, [['p',""]], [[""]])
-        return redirect("/admin/issue/url")
+    addIssue("Unnamed", date, " ", url, [['p', ""]], [[""]])
+    return redirect("/admin/issues/" + url)
 
-    return render_template('admin-issues.html', name="Issues", issues=issues)
+@app.route('/changeIssue', methods=['POST'])
+def changeIssue():
+    if not loggedIn():
+        return redirect('/admin/login')
+    url = request.form['url']
+    decision = request.form['decision']
+
+    if decision == "toggle":
+        toggleIssuePublicity(url)
+    else:
+        deleteIssue(url)
+    return redirect('/admin/issues')
 
 @app.route('/admin/issues/<id>', methods=['GET', 'POST'])
 def adminIssue(id):
+    if not loggedIn():
+        return redirect('/admin/login')
     issue, sections, texts = getIssue(id)
-
+    print("retrieved: ")
+    print(texts)
     if request.method == 'POST':
         title = request.form['title']
         desc = request.form['desc']
-        files = request.files.getlist('file')
         text = request.form.getlist('text')
         texts = []
+        group = []
         for item in text:
-            group = []
             if item != "Among us":
                 group.append(item)
             else:
                 texts.append(group)
                 group = []
-        upload_file()
-        print(files)
+        print("saved:")
+        print(texts)
+        files = upload_file()
 
-        #x = datetime.datetime.now()
-        #date = str(x.strftime("%Y") + x.strftime("%m") + x.strftime("%d"))
+        pastImages = []
+        for section in sections:
+            pastImages.append(section[1])
 
-        #addIssue(" ", date, " ", id, [['p',""]], texts)
+        for i in range(len(files)):
+            if files[i] == "":
+                if i < len(pastImages):
+                    files[i] = pastImages[i]
+
+        x = datetime.datetime.now()
+        date = str(x.strftime("%Y") + x.strftime("%m") + x.strftime("%d"))
+
+        newFiles = [['p', x] for x in files]
+
+        deleteIssue(id)
+        addIssue(title, date, desc, id, newFiles, texts)
+        return redirect("/admin/issues/"+id)
 
     return render_template('admin-editissue.html', name=issue[0], issue=issue, sections=sections, texts=texts)
 
 @app.route('/admin/blog', methods=['GET', 'POST'])
 def adminBlog():
+    if not loggedIn():
+        return redirect('/admin/login')
     if request.method == 'POST':
-        print("yo")
-        id = request.form['postNumber']
-        toggleBlogPostPublicity(id)
+        id = request.form['number']
+        if request.form['decision'] == 'delete':
+            deletePost(id)
+        else:
+            toggleBlogPostPublicity(id)
     posts = getBlogPosts()
     return render_template('admin-blog.html', name="Blog", posts=posts)
 
 @app.route('/admin/blog/upload', methods=['GET', 'POST'])
 def uploadBlog():
+    if not loggedIn():
+        return redirect('/admin/login')
     x = datetime.datetime.now()
     date = str(x.strftime("%Y") + x.strftime("%m") + x.strftime("%d"))
 
@@ -128,13 +197,15 @@ def uploadBlog():
         title = request.form['title']
         text  = request.form['text']
         imagename = upload_file()
+        imagename.pop(-1)
         print(imagename)
         print("posting!")
         addBlogPost(title, date, text, imagename)
-
+        return redirect('/admin/blog')
 
     return render_template('admin-uploadBlog.html', name='Upload to Blog')
 
+'''
 @app.route('/admin/blog/edit/<id>', methods=['GET', 'POST'])
 def editBlog(id):
     post = getBlogPost(id)
@@ -151,6 +222,7 @@ def editBlog(id):
         updateBlogPost(title, date, text, imagename, id)
 
     return render_template('admin-editBlog.html', name='Upload to Blog', post=post)
+'''
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():

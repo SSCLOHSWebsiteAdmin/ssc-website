@@ -16,8 +16,14 @@ function checkTransition()
     var points = getPoints();
     var section = 0;
     var textSide = document.getElementById("textSide");
+    var body = document.getElementsByTagName("BODY")[0];
+    if (10 < textSide.scrollTop && textSide.scrollTop < textSide.scrollHeight - textSide.offsetHeight - 10)
+    {
+        console.log(String(textSide.offsetParent) + " " + String(textSide.offsetTop));
+        window.scrollTo(0,textSide.offsetTop);
+    }
 
-    while (points[section] < textSide.scrollTop + 500)
+    while (points[section] < textSide.scrollTop + (textSide.offsetHeight*(2/3)))
     {
         section = section + 1;
     }

@@ -22,13 +22,13 @@
         {% for section in sections %}
             <div>
                 <center>
-                    <img src="{{section[1]}}">
+                    <img src="{{ url_for('static', filename='uploads/'+section[1]) }}" class="sectionImage">
                     <br>
                     <input type=file name="file">
                     <br>
 
                     {% for text in texts[loop.index0] %}
-                        <textarea name="text">{{text}}</textarea>
+                        <textarea name="text">{{text[0]}}</textarea>
                         <br>
                     {% endfor %}
                     <div class="button" onclick="newText(this)">New Text</div>

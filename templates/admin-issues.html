@@ -8,21 +8,38 @@
 {% block content %}
     <h1 id="title">{{name}}</h1>
 
-    <form id="newIssue" method=post enctype=multipart/form-data>
-        <input type="hidden" id="url" name="url" value="sus">
+    <form id="newIssue" action="{{ url_for('newIssue') }}" method=post enctype=multipart/form-data>
+        <input type="hidden" id="newUrl" name="newUrl" value="sus">
     </form>
 
-    <div class="button" onclick="newIssue()">
-        New Issue
+    <form id="form" action="{{ url_for('changeIssue') }}" method = "POST">
+        <input type="hidden" id="url" name="url" value="">
+        <input type="hidden" id="decision" name="decision" value="">
+    </form>
+
+    <div style="width: 100vw;">
+        <div style="position: relative; left:80%;" class="button" onclick="newIssue()">
+            New Issue
+        </div>
     </div>
 
     {% for issue in issues %}
         <div class="articleBox">
+            <div class="articleThumb">
+                <img src="{{ url_for('static', filename='uploads/'+thumbs[loop.index0]) }}" class="articleImage">
+            </div>
+
             <a href="/admin/issues/{{issue[3]}}" class="articleInfo">
                 <h1>{{issue[0]}}</h1>
-                <p>{{issue[1]}}</p>
+                <p>{{issue[1][6:8]}}/{{issue[1][4:6]}}/{{issue[1][0:4]}}</p>
                 <p>{{issue[2]}}</p>
             </a>
+            <input type="button" value="delete" onclick="submit('{{issue[3]}}', 'delete')" class="delete">
+            {% if issue[4] == false %}
+                <input type="button" value="share" onclick="submit('{{issue[3]}}', 'toggle')" class="share">
+            {% else %}
+                <input type="button" value="unshare" onclick="submit('{{issue[3]}}','toggle')" class="share">
+            {% endif %}
         </div>
     {% endfor %}
 {% endblock %}

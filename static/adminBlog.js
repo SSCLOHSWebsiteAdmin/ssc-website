@@ -1,5 +1,9 @@
-function submit(number)
+function submit(number, decision)
 {
-    document.getElementById("hidden").value = number;
-    document.getElementById("form").submit();
+    if (confirm("Are you sure you want to " + decision + "?"))
+    {
+        document.getElementById("number").value = number;
+        document.getElementById("decision").value = decision;
+        document.getElementById("form").submit();
+    }
 }

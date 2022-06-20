@@ -8,7 +8,8 @@
 {% block content %}
 
     <form id="form" method = "POST">
-        <input type="hidden" id="hidden" name="postNumber" value="">
+        <input type="hidden" id="number" name="number" value="">
+        <input type="hidden" id="decision" name="decision" value="">
     </form>
 
     <h1 id="title">{{name}}</h1>
@@ -23,10 +24,11 @@
 
 {% for post in posts %}
         <div class="articleBox">
-
+            {% if post[3]|length > 0 %}
             <div class="articleThumb">
                 <img src="{{ url_for('static', filename='uploads/'+post[3][0]) }}" class="articleImage">
             </div>
+            {% endif %}
 
             <div class="articleInfo">
             <a href="/admin/blog/edit/{{post[4]}}">
@@ -36,10 +38,11 @@
             </a>
             </div>
 
+            <input type="button" value="delete" onclick="submit('{{post[4]}}', 'delete')" class="delete">
             {% if post[5] == false %}
-                <input type="button" value="share" onclick="submit({{post[4]}})" class="articleOption">
+                <input type="button" value="share" onclick="submit({{post[4]}}, 'toggle')" class="share">
             {% else %}
-                <input type="button" value="unshare" onclick="submit({{post[4]}})" class="articleOption">
+                <input type="button" value="unshare" onclick="submit({{post[4]}}, 'toggle')" class="share">
             {% endif %}
         </div>
     {% endfor %}

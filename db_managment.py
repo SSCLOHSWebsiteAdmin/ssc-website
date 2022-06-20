@@ -102,7 +102,33 @@ def addIssueByText():
 
     addIssue(title, date, desc, url, sections, texts)
 
-def deleteIssue():
+def deleteIssue(url):
+    global con, cursor
+
+    cursor.execute('''
+        DELETE FROM
+            issueSection
+        WHERE
+            urlCode = ?
+        ;''', (url,))
+
+    cursor.execute('''
+        DELETE FROM
+            issueText
+        WHERE
+            urlCode = ?
+        ;''', (url,))
+
+    cursor.execute('''
+        DELETE FROM
+            issue
+        WHERE
+            urlCode = ?
+        ;''', (url,))
+
+    con.commit()
+
+def TextDeleteIssue():
     global con, cursor
 
     issues = cursor.execute('''
@@ -123,12 +149,7 @@ def deleteIssue():
 
     if choice != 'n':
         deleted = issues[int(choice)-1][0]
-        cursor.execute('''
-            DELETE FROM
-                issue
-            WHERE
-                urlCode = ?
-            ;''',(deleted,))
+        deleteIssue(deleted)
     else:
         print('canceled!')
 
@@ -197,9 +218,10 @@ def getIssue(urlCode):
                 urlCode = ?
         ;''',(urlCode,)).fetchone()
 
+    print("urlCode: " + urlCode)
+    print("issue")
     print(issue)
-    issueId = issue[4]
-    print(issueId)
+
     sections = cursor.execute('''
             SELECT
                 *
@@ -226,9 +248,11 @@ def getIssue(urlCode):
         ;''',(urlCode, sectionId)).fetchall()
 
         texts.append(newTexts)
+    print("texts:")
+    print(texts)
     return issue, sections, texts
 
-def getIssueBasic():
+def getPublicIssueBasic():
     global con, cursor
 
     basic = cursor.execute('''
@@ -239,16 +263,92 @@ def getIssueBasic():
                 urlCode
             FROM
                 issue
+            WHERE
+                public = True
             ORDER BY
                 date DESC
         ;''').fetchall()
 
-    return basic
+    thumbs = []
+    for issue in basic:
+        thumb = cursor.execute('''
+            SELECT
+                link
+            FROM
+                issueSection
+            WHERE
+                urlCode = ? AND sectionId = 0
+            ;''',(issue[3],)).fetchone()
+        thumbs.append(thumb[0])
 
-# Blog
-def deletePost():
+    return basic, thumbs
+
+def getIssueBasic():
     global con, cursor
 
+    basic = cursor.execute('''
+            SELECT
+                title,
+                date,
+                desc,
+                urlCode,
+                public
+            FROM
+                issue
+            ORDER BY
+                date DESC
+        ;''').fetchall()
+
+    thumbs = []
+    for issue in basic:
+        thumb = cursor.execute('''
+            SELECT
+                link
+            FROM
+                issueSection
+            WHERE
+                urlCode = ? AND sectionId = 0
+            ;''',(issue[3],)).fetchone()
+        thumbs.append(thumb[0])
+
+    return basic, thumbs
+
+def toggleIssuePublicity(id):
+    global con, cursor
+
+    public = cursor.execute('''
+        SELECT public
+        FROM issue
+        WHERE urlCode = ?
+    ;''', (id,)).fetchone()[0]
+    if public == 0:
+        cursor.execute('''
+            UPDATE issue
+            SET public = True
+            WHERE urlCode = ?
+        ;''', (id,))
+    else:
+        cursor.execute('''
+            UPDATE issue
+            SET public = False
+            WHERE urlCode = ?
+        ;''', (id,))
+
+    con.commit()
+
+# Blog
+def deletePost(id):
+    global con, cursor
+
+    cursor.execute('''
+        DELETE FROM
+            blog
+        WHERE
+            id = ?
+        ;''', (id,))
+    con.commit()
+
+def textDeletePost():
     blog = cursor.execute('''
         SELECT
             title
@@ -381,7 +481,10 @@ def getBlogPosts():
                 group_id = ?
         ;''', (posts[i][3],)).fetchall()
 
-        posts[i][3] = images[0]
+        if len(images) > 0:
+            posts[i][3] = images[0]
+        else:
+            posts[i][3] = []
 
     print(posts)
     return posts
@@ -411,7 +514,16 @@ def getPublicBlogPosts():
                 group_id = ?
         ;''', (posts[i][3],)).fetchall()
 
-        posts[i][3] = images
+        print('images0')
+        print(images)
+
+        if len(images) > 0:
+            posts[i][3] = images
+        else:
+            posts[i][3] = []
+
+        print("images1")
+        print(posts[i][3])
 
     return posts
 
@@ -466,8 +578,8 @@ if __name__ == "__main__":
     elif choice == '1':
         addIssueByText()
     elif choice == '2':
-        deleteIssue()
+        TextDeleteIssue()
     elif choice == '3':
-        deletePost()
+        textDeletePost()
     elif choice == '4':
         resetDatebase()

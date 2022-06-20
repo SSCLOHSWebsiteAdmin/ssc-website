@@ -1,3 +1,8 @@
+html
+{
+    scroll-behavior: smooth;
+}
+
 a:visited {
   color: gray;
 }
@@ -8,9 +13,8 @@ a:visited {
     display: block;
     margin:auto;
     width: 90vw;
-    max-width: 600px;
-    height: 25vw;
-    max-height: 150px;
+    max-width: 1000px;
+    min-height: 200px;
     margin-top: 2%;
     background: #FFFFFF;
     border-color: #a0a0a0;
@@ -20,9 +24,9 @@ a:visited {
 
 .articleThumb
 {
-    height: 85%;
-    position: absolute;
-    width: 25%;
+    position: relative;
+    height: 100%;
+    width: 30%;
     left: 2%;
     justify-content: center;
     display: flex;
@@ -34,20 +38,28 @@ a:visited {
 {
     margin:2%;
     max-width:100%;
-    max-height: 125px;
+    max-height: 100%;
 }
 
 .articleInfo
 {
     position: absolute;
-    width: 65%;
-    left: 35%;
+    top: 5%;
+    width: 55%;
+    left: 40%;
 }
 
-.articleOption
+.share
 {
     position: absolute;
     right: 10px;
+    bottom: 10px;
+}
+
+.delete
+{
+    position: absolute;
+    right: 80px;
     bottom: 10px;
 }
 

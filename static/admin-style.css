@@ -176,3 +176,9 @@ a:link{
     cursor: pointer;
     background-color: #5070AC;
 }
+
+.sectionImage
+{
+    max-width: 80%;
+    max-height: 600px;
+}
