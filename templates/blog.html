@@ -12,13 +12,13 @@
         <h1>{{post[0]}}</h1>
         <p>{{post[1][6:8]}}/{{post[1][4:6]}}/{{post[1][0:4]}}</p>
         {% if post[3]|length == 1 %}
-            <div class="carousel" style="width:50%; height: 20vw;">
+            <div class="carousel" style="width:50%;">
                 <img class="shown-carousel-item carousel-item" src="{{ url_for('static', filename='uploads/'+post[3][0][0]) }}">
             </div>
         {% endif %}
 
         {% if post[3]|length > 1 %}
-        <div class="carousel" style="width:50%; height: 20vw;">
+        <div class="carousel" style="width:50%;">
             <img src="static/button.svg" onclick="moveCarousel(this,-1)" class="left arrow">
             <div class="carousel-items">
                 <img class="shown-carousel-item carousel-item" src="{{ url_for('static', filename='uploads/'+post[3][0][0]) }}">
@@ -30,7 +30,7 @@
         </div>
         {% endif %}
 
-        <p>{{post[2]}}</p>
+        <p style="max-width:1000px; max-width:80vw;">{{post[2]}}</p>
     </div>
     <hr style="margin:5%; border: 1px solid black;">
 {% endfor %}

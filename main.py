@@ -75,10 +75,11 @@ def loggedIn():
     else:
         return True
 
-@app.route('/admin/login', methods=['POST'])
+@app.route('/admin/login', methods=['GET', 'POST'])
 def login():
     print("login")
     message = ""
+
     if request.method == 'POST':
         password = request.form['password']
 

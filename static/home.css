@@ -109,9 +109,11 @@
 #executives
 {
     padding: 5%;
-    background-image: url("among.svg");
+    background-image: url("/static/images/sheilds.svg");
     background-repeat: repeat;
     background-color: #efefef;
+    background-attachment: fixed;
+    background-position: center;
 }
 
 .exec-block

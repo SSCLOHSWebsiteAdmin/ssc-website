@@ -31,11 +31,8 @@
             {% endif %}
 
             <div class="articleInfo">
-            <a href="/admin/blog/edit/{{post[4]}}">
-
                 <h1>{{post[0]}}</h1>
                 <p>{{post[1][6:8]}}/{{post[1][4:6]}}/{{post[1][0:4]}}</p>
-            </a>
             </div>
 
             <input type="button" value="delete" onclick="submit('{{post[4]}}', 'delete')" class="delete">
