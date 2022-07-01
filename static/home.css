@@ -1,3 +1,8 @@
+body
+{
+    overflow-x: hidden;
+}
+
 #sky
 {
     width: 100vw;
@@ -44,12 +49,18 @@
     position: absolute;
     top: 23vw;
 }
+
+@media only screen and (max-width: 600px) {
+  #bannerCarousel {
+    visibility: collapse;
+  }
+}
+
 .banner
 {
-    background-color: #272727;
-    width: 50vw;
-    height: 20vh;
-    border-radius: 20px;
+    width:871;
+    height:128;
+    border-radius: 25px;
 }
 
 .homeTitle
@@ -134,28 +145,31 @@
     margin-bottom:10%;
     position: relative;
     width: 100%;
-    height: 35vw;
+    display:block;
+    overflow: auto;
 }
 
 .exec-box
 {
     width: 60%;
     height: 80%;
-    position: absolute;
+    position: relative;
 }
 
 .exec-img
 {
-    position: absolute;
-    height:80%;
+    position: relative;
+    width:30%;
 }
 
 .left-exec
 {
     left: 0%;
+    float: left;
 }
 
 .right-exec
 {
     right: 0%;
+    float: right;
 }

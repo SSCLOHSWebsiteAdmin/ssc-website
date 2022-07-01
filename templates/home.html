@@ -14,11 +14,30 @@
     <img src="static/bg.svg" id="school">
 {% endblock %}
 {% block content %}
-    <div class="carousel" style="width:80%; height: 10vw; margin:auto; margin-top: 80px;">
+    <div id="bannerCarousel" class="carousel" style="width:80%; height: 10vw; margin:auto; margin-top: 80px;">
         <img src="static/button.svg" onclick="moveCarousel(this,-1)" class="left arrow">
         <div class="carousel-items">
-            <img class="shown-carousel-item carousel-item" src="{{ url_for('static', filename='report_form.svg') }}">
-            <img class="hidden-carousel-item carousel-item" src="{{ url_for('static', filename='among1.png') }}">
+            <div class="shown-carousel-item carousel-item banner" style="background-color: #272727;">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeLff4SSYWOGVpNBKCif-iMwYbk36gqf-O1jzo4VvwffRx-Qg/viewform">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Google_Forms_logo_%282014-2020%29.svg/96px-Google_Forms_logo_%282014-2020%29.svg.png?20201024102621" style="position:absolute; height:80%; left:12%; top:10%;">
+                    <p style="font-size: 2vw; color:white; position:absolute; width:64%; left:21%; top:25%;">If you are an LOHS Studen and have been targeted by discrimination, please tell us your story using this secure Discrimination Incident Reporting Form</p>
+                </a>
+            </div>
+
+            <div class="hidden-carousel-item carousel-item banner" style="background-color: #d64747;">
+                <a href="/issues/{{issues[0][1]}}">
+                    <img src="static/images/Shield.svg" style="position:absolute; height:80%; left:12%; top:10%;">
+                    <p style="font-size: 2.5vw; color:white; position:absolute; width:64%; left:21%; top:25%;">Read our issue: {{issues[0][0]}}</p>
+                </a>
+            </div>
+
+            <div class="hidden-carousel-item carousel-item banner" style="background-color: #d64747;">
+                <a href="/issues/{{issues[1][1]}}">
+                    <img src="static/images/Shield.svg" style="position:absolute; height:80%; left:12%; top:10%;">
+                    <p style="font-size: 2.5vw; color:white; position:absolute; width:64%; left:21%; top:25%;">Read our issue: {{issues[1][0]}}</p>
+                </a>
+            </div>
+
         </div>
         <img src="static/button.svg" onclick="moveCarousel(this,1)" class="right arrow">
     </div>

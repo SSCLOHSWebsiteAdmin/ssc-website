@@ -39,7 +39,8 @@ def index():
 
 @app.route('/home')
 def home():
-    return render_template('home.html', name="Home")
+    issues = getRecentIssues()
+    return render_template('home.html', name="Home", issues=issues)
 
 @app.route('/ShowYourSolidarity')
 def SYS():

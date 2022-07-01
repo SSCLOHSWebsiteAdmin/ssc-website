@@ -66,6 +66,20 @@ def resetDatebase():
 
     con.commit()
 
+def getRecentIssues():
+    global con, cursor
+    issues = cursor.execute('''
+        SELECT
+            title,
+            urlCode
+        FROM
+            issue
+        ORDER BY
+            date DESC
+    ;''').fetchmany(size=2)
+    print(issues)
+    return issues
+
 def addCurrentEvent(title, date, text, images):
     global con, cursor
     cursor.execute('''
