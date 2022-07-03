@@ -1,4 +1,4 @@
-from flask import Flask, flash, session, render_template, redirect, url_for, request, send_from_directory
+from flask import Response, Flask, flash, session, render_template, redirect, url_for, request, send_from_directory
 from db_managment import *
 import os
 from os.path import join, dirname, realpath
@@ -41,6 +41,90 @@ def index():
 def home():
     issues = getRecentIssues()
     return render_template('home.html', name="Home", issues=issues)
+
+@app.route('/rss/issues')
+def rssIssues():
+    issues, thumbs = getPublicIssueBasic()
+
+    items = ""
+
+    if len(issues) > 10:
+        length = 10
+    else:
+        length = len(issues)
+
+    for i in range(length):
+        title = issues[i][0]
+        desc = issues[i][2]
+        url = url_for('issue', id=issues[i][3])
+        img = url_for('download_file', name=thumbs[i])
+
+        items += '''<item>
+        <title>''' + title + ''''</title>
+        <link>''' + url + '''</link>
+        <image>
+            <url>''' + img + '''</url>
+            <title>''' + title + ''' image</title>
+            <link>''' + url + '''</link>
+        </image>
+        <description>''' + desc + '''</description>
+        </item>'''
+
+    xml = '''
+    <rss version = "2.0">
+    <channel>
+    <title> LOHS SSC | Issues</title>
+    <link> https://www.lohs.ca/ssc </link>
+    <description>Research by Lillian Osborne High School's Student Solidarity Committee</description>
+    ''' + items + '''
+    </channel>
+    </rss>
+    '''
+
+    return Response(xml, mimetype='text/xml')
+
+@app.route('/rss/blog')
+def rssBlog():
+    posts = getPublicBlogPosts()
+
+    items = ""
+
+    if len(posts) > 10:
+        length = 10
+    else:
+        length = len(posts)
+
+    for i in range(length):
+        title = posts[i][0]
+        desc = posts[i][2]
+        if len(posts[i][3]) > 0:
+            img = url_for('download_file', name=posts[i][3][0])
+        else:
+            img = ""
+
+        items += '''<item>
+        <title>''' + title + ''''</title>
+        <link>''' + url_for('blog') + '''</link>
+        <image>
+            <url>''' + img + '''</url>
+            <title>''' + title + ''' image</title>
+            <link>''' + url_for('blog') + '''</link>
+        </image>
+        <description>''' + desc + '''</description>
+        </item>'''
+
+    xml = '''
+    <rss version = "2.0">
+    <channel>
+    <title> LOHS SSC | Issues</title>
+    <link> https://www.lohs.ca/ssc </link>
+    <description>Research by Lillian Osborne High School's Student Solidarity Committee</description>
+    ''' + items + '''
+    </channel>
+    </rss>
+    '''
+
+    return Response(xml, mimetype='text/xml')
 
 @app.route('/ShowYourSolidarity')
 def SYS():

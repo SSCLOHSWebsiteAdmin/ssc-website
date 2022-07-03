@@ -8,7 +8,7 @@
 {% block content %}
     <h1 id="title">{{name}}</h1>
     <p style="margin: 5%;">{{issue[2]}}</p>
-    <div class="window">
+    <div id="window">
 
     <div id="imageSide">
         <img class="image show" src="{{ url_for('static', filename='uploads/'+sections[0][1]) }}">

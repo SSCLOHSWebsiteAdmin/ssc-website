@@ -50,12 +50,6 @@ body
     top: 23vw;
 }
 
-@media only screen and (max-width: 600px) {
-  #bannerCarousel {
-    visibility: collapse;
-  }
-}
-
 .banner
 {
     width:871;
@@ -149,27 +143,61 @@ body
     overflow: auto;
 }
 
-.exec-box
-{
-    width: 60%;
-    height: 80%;
-    position: relative;
+@media only screen and (max-width: 600px) {
+    #bannerCarousel {
+    visibility: collapse;
+    }
+
+    .exec-box
+    {
+        width: 90%;
+        height: 80%;
+        position: relative;
+    }
+
+    .exec-img
+    {
+        position: relative;
+        margin-top: 10%;
+        width:80%;
+    }
+
+    .left-exec
+    {
+        left: 0%;
+        float: left;
+    }
+
+    .right-exec
+    {
+        left: 0%;
+        float: left;
+    }
 }
 
-.exec-img
-{
-    position: relative;
-    width:30%;
-}
+@media only screen and (min-width: 600px) {
+    .exec-box
+    {
+        width: 60%;
+        height: 80%;
+        position: relative;
+    }
 
-.left-exec
-{
-    left: 0%;
-    float: left;
-}
+    .exec-img
+    {
+        position: relative;
+        width:30%;
+    }
 
-.right-exec
-{
-    right: 0%;
-    float: right;
+    .left-exec
+    {
+        left: 0%;
+        float: left;
+    }
+
+    .right-exec
+    {
+        right: 0%;
+        float: right;
+    }
 }
