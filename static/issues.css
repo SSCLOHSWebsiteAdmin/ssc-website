@@ -67,6 +67,7 @@ a:visited {
 
 .image
 {
+    width: max-content;
     min-width:30%;
     max-width:80%;
     min-height: 30vh;

@@ -5,7 +5,12 @@
 {% block decorations %}
 {% endblock %}
 {% block content %}
-    <h1 id="title">{{name}}</h1>
+<h1 id="title">{{name}} <span><a href="{{url_for('rssIssues')}}"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Generic_Feed-icon.svg/512px-Generic_Feed-icon.svg.png?20120905025810" style="position:relative; width: 50px; bottom:-5px;"></a></span></h1>
+
+    <div style="width: 100vw;">
+
+
+    </div>
 
     {% for issue in issues %}
         <div class="articleBox">
